@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import MainApp from './components/MainApp';
+import LoginPage from './components/LoginPage';
+import LoadingScreen from './components/LoadingScreen';
 import { auth } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
-import LoginPage from './components/LoginPage';
-import MainApp from './components/MainApp';
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
       setLoading(false);
     });
+
     return () => unsubscribe();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // 可以替换为更好的加载动画
+    return <LoadingScreen />;
   }
 
-  return (
-    <div className="App">
-      {user ? <MainApp user={user} /> : <LoginPage />}
-    </div>
-  );
+  return user ? <MainApp user={user} /> : <LoginPage />;
 }
 
 export default App;

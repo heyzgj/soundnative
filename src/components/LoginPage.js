@@ -34,7 +34,7 @@ const LoginPage = () => {
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      // 先登出当前用户，确保每次点击 Google 登录按钮时都会触发登录弹窗
+      // Sign out the current user to ensure the Google login popup is triggered
       await signOut(auth);
       await signInWithPopup(auth, provider);
     } catch (error) {
@@ -47,8 +47,8 @@ const LoginPage = () => {
   };
 
   return (
-    <Container maxWidth="xs">
-      <Box className="login-box" sx={{ textAlign: 'center', mt: 8, p: 3, boxShadow: 3, borderRadius: 2 }}>
+    <Container maxWidth="xs" sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <Box className="login-box" sx={{ textAlign: 'center', p: 3, boxShadow: 3, borderRadius: 2 }}>
         <Button
           variant="contained"
           color="primary"

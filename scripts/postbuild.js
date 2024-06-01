@@ -3,7 +3,7 @@ const path = require('path');
 
 // 定义源目录和目标目录
 const buildDir = path.join(__dirname, '..', 'build');
-const unpackedDir = path.join(buildDir, 'unpacked');
+const unpackedDir = path.join(__dirname, '..', 'unpacked');
 const publicDir = path.join(__dirname, '..', 'public');
 const tempDir = path.join(__dirname, '..', 'temp-unpacked');
 
@@ -25,7 +25,7 @@ fs.copySync(buildDir, tempDir, {
   filter: (src) => {
     const basename = path.basename(src);
     // 仅复制构建生成的文件
-    return basename !== 'unpacked' && basename !== 'index.html';
+    return basename !== 'unpacked';
   }
 });
 

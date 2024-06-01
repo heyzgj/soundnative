@@ -14,12 +14,14 @@ import {
   FormControl,
   InputLabel,
   IconButton,
-  Snackbar,
+  CircularProgress,
   Paper,
+  Snackbar,
 } from '@mui/material';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import { auth } from '../firebase/config';
 import './MainApp.css';
+import './WixMadeforText.css'; // Include custom font
 
 const MainApp = ({ user }) => {
   const [inputText, setInputText] = useState('');
@@ -27,14 +29,16 @@ const MainApp = ({ user }) => {
   const [mode, setMode] = useState('business');
   const [userName, setUserName] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
-      setUserName(user.displayName || user.email); // 使用用户名称或邮箱
+      setUserName(user.displayName || user.email);
     }
   }, [user]);
 
   const translateText = async () => {
+    setLoading(true);
     const systemPrompt = mode === 'business'
       ? 'You are a professional assistant in a business environment.'
       : mode === 'email'
@@ -60,6 +64,8 @@ const MainApp = ({ user }) => {
       }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,27 +80,28 @@ const MainApp = ({ user }) => {
   };
 
   return (
-    <Container maxWidth={false} disableGutters sx={{ height: '100vh', overflow: 'auto' }}>
-      <AppBar position="static">
+    <Container maxWidth="sm" sx={{ height: '100vh', overflow: 'auto' }}>
+      {/* Change AppBar color to #3a97ad */}
+      <AppBar position="static" sx={{ background: '#3a97ad' }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily: 'Wix Madefor Text', fontWeight: 'bold' }}>
             SoundNative
           </Typography>
-          <Typography variant="body1" sx={{ mr: 2 }}>
-            {userName}
-          </Typography>
-          <Logout />
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingRight: '10px' }}>
+            {/* <Typography variant="body1">{userName}</Typography> */}
+            <Logout sx={{ marginTop: 1 }}/>
+          </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ my: 4, p: 3, boxShadow: 3, borderRadius: 2, backgroundColor: '#fff', margin: 'auto', maxWidth: '600px' }}>
+      <Box sx={{ my: 4, p: 3, boxShadow: 3, borderRadius: 2, backgroundColor: '#fff', margin: 'auto', maxWidth: '600px', minHeight: 'calc(100vh - 128px)' }}>
         <Typography variant="h4" gutterBottom>
-          Text Generator
+          老婆牌老外交流神器
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          Generate professional or casual text in seconds
+          为灰灰老婆专门定制！
         </Typography>
         <TextField
-          label="Enter your text here"
+          label="老婆输入你的文本"
           multiline
           fullWidth
           rows={4}
@@ -117,17 +124,33 @@ const MainApp = ({ user }) => {
             <MenuItem value="resume">Resume</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" color="primary" onClick={translateText} fullWidth sx={{ mb: 2 }}>
+        {/* Change Button color to #3a97ad */}
+        <Button variant="contained" color="primary" onClick={translateText} fullWidth sx={{ mb: 2, background: '#3a97ad' }}>
           Generate
         </Button>
         <Paper className="output-box" sx={{ mt: 2, p: 2, boxShadow: 1, borderRadius: 1, backgroundColor: '#f9f9f9', position: 'relative' }}>
-          <Typography variant="body1">{outputText}</Typography>
-          <IconButton
-            onClick={handleCopy}
-            className="copy-button"
-          >
-            <ContentCopyIcon />
-          </IconButton>
+          {/* Loading animation confined to output box */}
+          {loading ? (
+            <Box className="loading-container" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }}>
+              <CircularProgress size={24} />
+              <Typography variant="body1" sx={{ ml: 2 }}>Generating...</Typography>
+            </Box>
+          ) : (
+            <Box sx={{ position: 'relative' }}>
+              <Typography variant="body1" sx={{ color: outputText ? 'inherit' : 'grey.500' }}>
+                {outputText || '最地道最In的英语会出现在这里'}
+              </Typography>
+            {outputText && (
+              <IconButton
+                onClick={handleCopy}
+                className="copy-button"
+                sx={{ position: 'absolute', bottom: -8, right: -8 }}
+              >
+                <ContentCopyIcon />
+              </IconButton>
+            )}
+            </Box>
+          )}
         </Paper>
       </Box>
       <Snackbar
