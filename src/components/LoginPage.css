@@ -1,17 +1,47 @@
-/* .login-box {
-    background-color: #fff;
-    padding: 32px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .privacy-box {
-    background-color: #f9f9f9;
-  } */
-  
+/* LoginPage.css */
 .login-box {
   background-color: #fff;
   padding: 32px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  width: 100%; /* Ensure the container fits its content */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centering content */
+}
+
+body {
+  font-family: 'Wix Madefor Text', sans-serif;
+}
+
+.MuiTab-root {
+  font-weight: bold;
+  text-transform: none; /* Prevent uppercase transformation */
+  color: #3a97ad;
+  padding: 6px 12px;
+}
+
+.MuiTabs-indicator {
+  background-color: #3a97ad; /* Theme color for the active tab indicator */
+}
+
+.MuiButton-root {
+  font-weight: bold;
+}
+
+.MuiLink-root {
+  color: #3a97ad; /* Theme color for links */
+  font-weight: bold;
+}
+
+.MuiTab-root.Mui-selected {
+  color: #3a97ad; /* Theme color for selected tab */
+}
+
+.MuiTab-root:hover {
+  background-color: rgba(56, 111, 123, 0.1); /* Subtle background on hover */
+}
+
+.MuiTabs-flexContainer {
+  justify-content: space-between; /* Ensure tabs are spaced correctly */
 }
