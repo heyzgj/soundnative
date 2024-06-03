@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.4.1",
-    "@emotion/styled": "^11.3.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.0.6",
-    "@mui/material": "^5.0.6",
+    "@mui/material": "^5.15.19",
     "axios": "^1.7.2",
     "firebase": "^9.6.1",
     "react": "^18.0.0",
@@ -14,11 +14,10 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "build:dev": "react-scripts build --profile --no-minify",
-    "postbuild": "node scripts/postbuild.js",
-    "test": "react-app-rewired test",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

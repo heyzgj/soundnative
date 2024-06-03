@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 if (process.env.NODE_ENV === 'production') {
   window.dataLayer = window.dataLayer || [];
@@ -12,10 +13,14 @@ if (process.env.NODE_ENV === 'production') {
   gtag('config', 'G-FHS1NB2B9S');
 }
 
+const theme = createTheme();
+
 const container = document.getElementById('root');
-const root = createRoot(container); // 使用新的 API
+const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );

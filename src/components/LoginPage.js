@@ -47,6 +47,10 @@ const LoginPage = () => {
     setShowPassword(!showPassword);
   };
 
+  const onSignup = () => {
+    setTab('register')
+  }
+
   return (
     <Container maxWidth="xs" sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <Box className="login-box" sx={{ textAlign: 'center', p: 3, boxShadow: 3, borderRadius: 2, width: '100%' }}>
@@ -145,7 +149,7 @@ const LoginPage = () => {
         )}
         {tab === 'login' && (
           <Typography variant="body2" sx={{ mt: 2 }}>
-            Don't have an account? <Link href="#" onClick={() => setTab('register')} sx={{ color: '#3a97ad', fontWeight: 'bold' }}>Register</Link>
+            Don't have an account? <Link href="#" onClick={onSignup} sx={{ color: '#3a97ad', fontWeight: 'bold' }}>Register</Link>
           </Typography>
         )}
         {tab === 'register' && (

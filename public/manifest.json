@@ -9,23 +9,12 @@
     "192": "icons/icon192.png",
     "512": "icons/icon512.png"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png",
-      "192": "icons/icon192.png",
-      "512": "icons/icon512.png"
-    },
+    "default_popup": "index.html",
+    "default_icon": "favicon.ico",
     "default_title": "SoundNative"
   },
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';"
-  },
   "permissions": [
-    "storage"
+    "storage", "scripting"
   ]
 }

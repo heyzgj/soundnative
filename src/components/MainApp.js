@@ -19,7 +19,6 @@ import {
   Snackbar,
 } from '@mui/material';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
-import { auth } from '../firebase/config';
 import './MainApp.css';
 import './WixMadeforText.css'; // Include custom font
 
@@ -40,7 +39,7 @@ const MainApp = ({ user }) => {
   const translateText = async () => {
     setLoading(true);
     const systemPrompt = mode === 'business'
-      ? 'You are a professional assistant in a business environment.'
+      ? 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. Only output the rephrased response.'
       : mode === 'email'
       ? 'You are writing a formal email.'
       : mode === 'resume'
@@ -118,7 +117,7 @@ const MainApp = ({ user }) => {
             label="Mode"
             onChange={(e) => setMode(e.target.value)}
           >
-            <MenuItem value="business">Business</MenuItem>
+            <MenuItem value="business">闲聊</MenuItem>
             <MenuItem value="casual">Casual</MenuItem>
             <MenuItem value="email">Email</MenuItem>
             <MenuItem value="resume">Resume</MenuItem>
