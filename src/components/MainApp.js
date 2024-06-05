@@ -25,7 +25,7 @@ import './WixMadeforText.css'; // Include custom font
 const MainApp = ({ user }) => {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
-  const [mode, setMode] = useState('business');
+  const [mode, setMode] = useState('chat');
   const [userName, setUserName] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,13 +38,12 @@ const MainApp = ({ user }) => {
 
   const translateText = async () => {
     setLoading(true);
-    const systemPrompt = mode === 'business'
+    const systemPrompt = mode === 'chat'
       ? 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. Only output the rephrased response.'
-      : mode === 'email'
-      ? 'You are writing a formal email.'
-      : mode === 'resume'
-      ? 'You are creating a professional resume.'
-      : 'You are a friendly assistant chatting casually.';
+      : 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are emailing with a someone. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a email. Only output the rephrased email.';
+      // : mode === 'resume'
+      // ? 'You are creating a professional resume.'
+      // : 'You are a friendly assistant chatting casually.';
 
     const messages = [
       { role: 'system', content: systemPrompt },
@@ -117,10 +116,10 @@ const MainApp = ({ user }) => {
             label="Mode"
             onChange={(e) => setMode(e.target.value)}
           >
-            <MenuItem value="business">闲聊</MenuItem>
-            <MenuItem value="casual">Casual</MenuItem>
+            <MenuItem value="chat">Chat</MenuItem>
             <MenuItem value="email">Email</MenuItem>
-            <MenuItem value="resume">Resume</MenuItem>
+            {/* <MenuItem value="email">Email</MenuItem>
+            <MenuItem value="resume">Resume</MenuItem> */}
           </Select>
         </FormControl>
         {/* Change Button color to #3a97ad */}
@@ -135,15 +134,15 @@ const MainApp = ({ user }) => {
               <Typography variant="body1" sx={{ ml: 2 }}>Generating...</Typography>
             </Box>
           ) : (
-            <Box sx={{ position: 'relative' }}>
-              <Typography variant="body1" sx={{ color: outputText ? 'inherit' : 'grey.500' }}>
+            <Box sx={{ position: 'relative', paddingRight: '40px', paddingBottom: '40px'  }}>
+              <Typography variant="body1" sx={{ color: outputText ? 'inherit' : 'grey.500', whiteSpace: 'pre-line' }}>
                 {outputText || '最地道最In的英语会出现在这里'}
               </Typography>
             {outputText && (
               <IconButton
                 onClick={handleCopy}
                 className="copy-button"
-                sx={{ position: 'absolute', bottom: -8, right: -8 }}
+                sx={{ position: 'absolute'}}
               >
                 <ContentCopyIcon />
               </IconButton>
