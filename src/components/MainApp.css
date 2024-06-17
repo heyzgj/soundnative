@@ -1,10 +1,18 @@
 /* MainApp.css */
+body, html {
+  font-family: 'Noto Sans SC', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .output-box {
   position: relative;
   padding: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: #f9f9f9;
+  width: 100%; /* 确保盒子宽度为100% */
+  box-sizing: border-box; /* 包括内边距在内的总宽度 */
 }
 
 .copy-button {

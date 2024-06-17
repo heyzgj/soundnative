@@ -78,7 +78,7 @@ const MainApp = ({ user }) => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ height: '100vh', overflow: 'auto' }}>
+    <Container maxWidth="sm" sx={{ height: '100%', minHeight: '100vh', overflow: 'auto', padding: 0 }}>
       {/* Change AppBar color to #3a97ad */}
       <AppBar position="static" sx={{ background: '#3a97ad' }}>
         <Toolbar>
@@ -91,8 +91,8 @@ const MainApp = ({ user }) => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ my: 4, p: 3, boxShadow: 3, borderRadius: 2, backgroundColor: '#fff', margin: 'auto', maxWidth: '600px', minHeight: 'calc(100vh - 128px)' }}>
-        <Typography variant="h4" gutterBottom>
+      <Box sx={{ my: 4, p: 3, boxShadow: 3, borderRadius: 2, backgroundColor: '#fff', margin: 'auto', maxWidth: '100%', minHeight: 'calc(100vh - 128px)' }}>
+        <Typography variant="h4" sx={{ fontWeight: 600 }} gutterBottom>
           老婆牌老外交流神器
         </Typography>
         <Typography variant="subtitle1" gutterBottom>

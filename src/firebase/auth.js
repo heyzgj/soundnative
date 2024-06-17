@@ -1,6 +1,6 @@
 // src/firebase/auth.js
 import { auth } from './config';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth/web-extension';
 
 export const registerUser = async (email, password) => {
   try {

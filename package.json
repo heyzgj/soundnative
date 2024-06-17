@@ -8,7 +8,7 @@
     "@mui/icons-material": "^5.0.6",
     "@mui/material": "^5.15.19",
     "axios": "^1.7.2",
-    "firebase": "^9.6.1",
+    "firebase": "^10.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "4.0.3"
@@ -16,7 +16,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
-    "build:dev": "react-scripts build --profile --no-minify",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,8 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-app-rewired": "^2.2.1"
   }
 }
