@@ -39,7 +39,7 @@ const MainApp = ({ user }) => {
   const translateText = async () => {
     setLoading(true);
     const systemPrompt = mode === 'chat'
-      ? 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. Only output the rephrased response.'
+      ? 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. Only output the rephrased English response.'
       : 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are emailing with a someone. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a email. Only output the rephrased email.';
       // : mode === 'resume'
       // ? 'You are creating a professional resume.'
