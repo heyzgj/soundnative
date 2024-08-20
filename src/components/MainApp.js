@@ -39,7 +39,8 @@ const MainApp = ({ user }) => {
   const translateText = async () => {
     setLoading(true);
     const systemPrompt = mode === 'chat'
-      ? 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. Only output the rephrased English response.'
+      // ? 'Your task is to rephrase the input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. The causl level range value is from 1 up to 5, now your casual level is 3. Only output the rephrased English response. Now the input is:'
+      ? 'Your task is to rephrase the input text in [input][/input]in a very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. The casual level range value is from 1 up to 5, now your casual level is at 5. Only output the rephrased response.'
       : 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are emailing with a someone. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a email. Only output the rephrased email.';
       // : mode === 'resume'
       // ? 'You are creating a professional resume.'
@@ -47,7 +48,7 @@ const MainApp = ({ user }) => {
 
     const messages = [
       { role: 'system', content: systemPrompt },
-      { role: 'user', content: inputText },
+      { role: 'user', content: '[input]' + inputText  + '[/input]'},
     ];
     try {
       const response = await fetchChatCompletion(messages);
@@ -79,16 +80,12 @@ const MainApp = ({ user }) => {
 
   return (
     <Container maxWidth="sm" sx={{ height: '100%', minHeight: '100vh', overflow: 'auto', padding: 0 }}>
-      {/* Change AppBar color to #3a97ad */}
       <AppBar position="static" sx={{ background: '#3a97ad' }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily: 'Wix Madefor Text', fontWeight: 'bold' }}>
             SoundNative
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingRight: '10px' }}>
-            {/* <Typography variant="body1">{userName}</Typography> */}
-            <Logout sx={{ marginTop: 1 }}/>
-          </Box>
+          <Logout sx={{ marginTop: 1 }}/>
         </Toolbar>
       </AppBar>
       <Box sx={{ my: 4, p: 3, boxShadow: 3, borderRadius: 2, backgroundColor: '#fff', margin: 'auto', maxWidth: '100%', minHeight: 'calc(100vh - 128px)' }}>
@@ -99,7 +96,7 @@ const MainApp = ({ user }) => {
           为灰灰老婆专门定制！
         </Typography>
         <TextField
-          label="老婆输入你的文本"
+          label="老婆请输入您的文本"
           multiline
           fullWidth
           rows={4}
@@ -109,44 +106,39 @@ const MainApp = ({ user }) => {
           margin="normal"
         />
         <FormControl fullWidth margin="normal">
-          <InputLabel id="mode-select-label">Mode</InputLabel>
+          <InputLabel id="mode-select-label">模式</InputLabel>
           <Select
             labelId="mode-select-label"
             value={mode}
-            label="Mode"
+            label="模式"
             onChange={(e) => setMode(e.target.value)}
           >
-            <MenuItem value="chat">Chat</MenuItem>
-            <MenuItem value="email">Email</MenuItem>
-            {/* <MenuItem value="email">Email</MenuItem>
-            <MenuItem value="resume">Resume</MenuItem> */}
+            <MenuItem value="chat">聊天</MenuItem>
+            <MenuItem value="email">邮件</MenuItem>
           </Select>
         </FormControl>
-        {/* Change Button color to #3a97ad */}
-        <Button variant="contained" color="primary" onClick={translateText} fullWidth sx={{ mb: 2, background: '#3a97ad' }}>
-          Generate
+        <Button variant="contained" onClick={translateText} fullWidth sx={{ mb: 2, background: '#3a97ad' }}>
+          生成
         </Button>
-        <Paper className="output-box" sx={{ mt: 2, p: 2, boxShadow: 1, borderRadius: 1, backgroundColor: '#f9f9f9', position: 'relative' }}>
-          {/* Loading animation confined to output box */}
+        <Paper sx={{ mt: 2, p: 2, boxShadow: 1, borderRadius: 1, backgroundColor: '#f9f9f9', position: 'relative' }}>
           {loading ? (
-            <Box className="loading-container" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
               <CircularProgress size={24} />
-              <Typography variant="body1" sx={{ ml: 2 }}>Generating...</Typography>
+              <Typography variant="body1" sx={{ ml: 2 }}>正在生成...</Typography>
             </Box>
           ) : (
-            <Box sx={{ position: 'relative', paddingRight: '40px', paddingBottom: '40px'  }}>
+            <Box sx={{ position: 'relative', paddingRight: '40px', paddingBottom: '40px' }}>
               <Typography variant="body1" sx={{ color: outputText ? 'inherit' : 'grey.500', whiteSpace: 'pre-line' }}>
-                {outputText || '最地道最In的英语会出现在这里'}
+                {outputText || '最Rap的英语会出现在这里'}
               </Typography>
-            {outputText && (
-              <IconButton
-                onClick={handleCopy}
-                className="copy-button"
-                sx={{ position: 'absolute'}}
-              >
-                <ContentCopyIcon />
-              </IconButton>
-            )}
+              {outputText && (
+                <IconButton
+                  onClick={handleCopy}
+                  sx={{ position: 'absolute', right: 0, bottom: 0 }}
+                >
+                  <ContentCopyIcon />
+                </IconButton>
+              )}
             </Box>
           )}
         </Paper>
@@ -155,7 +147,7 @@ const MainApp = ({ user }) => {
         open={copySuccess}
         autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-        message="Text copied to clipboard"
+        message="文本已复制到剪贴板"
       />
     </Container>
   );

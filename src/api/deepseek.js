@@ -9,7 +9,7 @@ console.log("Base URL:", baseURL);
 export const fetchChatCompletion = async (messages) => {
   try {
     const response = await axios.post(`${baseURL}/chat/completions`, {
-      model: "deepseek-chat",
+      model: "deepseek-coder",
       messages: messages,
       stream: false,
     }, {
