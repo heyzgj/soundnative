@@ -5,7 +5,6 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { Box, TextField, Button, Typography, Divider, Link, Container, Tabs, Tab, IconButton, InputAdornment } from '@mui/material';
 import { Google as GoogleIcon, Visibility, VisibilityOff } from '@mui/icons-material';
 import './LoginPage.css';
-import './WixMadeforText.css'; // Include custom font
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

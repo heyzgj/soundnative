@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import './MainApp.css';
-import './WixMadeforText.css'; // Include custom font
+// import './WixMadeforText.css'; // Include custom font
 
 const MainApp = ({ user }) => {
   const [inputText, setInputText] = useState('');
@@ -82,9 +82,9 @@ const MainApp = ({ user }) => {
     <Container maxWidth="sm" sx={{ height: '100%', minHeight: '100vh', overflow: 'auto', padding: 0 }}>
       <AppBar position="static" sx={{ background: '#3a97ad' }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily: 'Wix Madefor Text', fontWeight: 'bold' }}>
+          {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily: 'Wix Madefor Text', fontWeight: 'bold' }}> */}
             SoundNative
-          </Typography>
+          {/* </Typography> */}
           <Logout sx={{ marginTop: 1 }}/>
         </Toolbar>
       </AppBar>
