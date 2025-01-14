@@ -20,7 +20,8 @@ import {
 } from '@mui/material';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import './MainApp.css';
-// import './WixMadeforText.css'; // Include custom font
+
+
 
 const MainApp = ({ user }) => {
   const [inputText, setInputText] = useState('');
@@ -54,13 +55,13 @@ const MainApp = ({ user }) => {
       const response = await fetchChatCompletion(messages);
       setOutputText(response);
 
-      if (window.gtag) {
-        window.gtag('event', 'translate', {
-          event_category: 'Text Translation',
-          event_label: mode,
-          value: inputText.length,
-        });
-      }
+      // if (window.gtag) {
+      //   window.gtag('event', 'translate', {
+      //     event_category: 'Text Translation',
+      //     event_label: mode,
+      //     value: inputText.length,
+      //   });
+      // }
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -90,13 +91,13 @@ const MainApp = ({ user }) => {
       </AppBar>
       <Box sx={{ my: 4, p: 3, boxShadow: 3, borderRadius: 2, backgroundColor: '#fff', margin: 'auto', maxWidth: '100%', minHeight: 'calc(100vh - 128px)' }}>
         <Typography variant="h4" sx={{ fontWeight: 600 }} gutterBottom>
-          老婆牌老外交流神器
+          English Translator for Huihui
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          为灰灰老婆专门定制！
+          For Huihui's special customization!
         </Typography>
         <TextField
-          label="老婆请输入您的文本"
+          label="Huihui please enter your text"
           multiline
           fullWidth
           rows={4}
@@ -106,19 +107,19 @@ const MainApp = ({ user }) => {
           margin="normal"
         />
         <FormControl fullWidth margin="normal">
-          <InputLabel id="mode-select-label">模式</InputLabel>
+          <InputLabel id="mode-select-label">Mode</InputLabel>
           <Select
             labelId="mode-select-label"
             value={mode}
             label="模式"
             onChange={(e) => setMode(e.target.value)}
           >
-            <MenuItem value="chat">聊天</MenuItem>
-            <MenuItem value="email">邮件</MenuItem>
+            <MenuItem value="chat">Conversation</MenuItem>
+            <MenuItem value="email">Email</MenuItem>
           </Select>
         </FormControl>
         <Button variant="contained" onClick={translateText} fullWidth sx={{ mb: 2, background: '#3a97ad' }}>
-          生成
+          Generate
         </Button>
         <Paper sx={{ mt: 2, p: 2, boxShadow: 1, borderRadius: 1, backgroundColor: '#f9f9f9', position: 'relative' }}>
           {loading ? (
@@ -129,7 +130,7 @@ const MainApp = ({ user }) => {
           ) : (
             <Box sx={{ position: 'relative', paddingRight: '40px', paddingBottom: '40px' }}>
               <Typography variant="body1" sx={{ color: outputText ? 'inherit' : 'grey.500', whiteSpace: 'pre-line' }}>
-                {outputText || '最Rap的英语会出现在这里'}
+                {outputText || 'Get ready for the most rap English'}
               </Typography>
               {outputText && (
                 <IconButton
@@ -147,7 +148,7 @@ const MainApp = ({ user }) => {
         open={copySuccess}
         autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-        message="文本已复制到剪贴板"
+        message="Text copied to clipboard"
       />
     </Container>
   );

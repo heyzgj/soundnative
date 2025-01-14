@@ -2,14 +2,13 @@
   "manifest_version": 3,
   "name": "SoundNative",
   "description": "Helps non-native speakers write like native English speakers.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icons": {  
     "48": "icons/icon48.png",
     "128": "icons/icon128.png",
     "872": "icons/icon872.png"
   },
   "action": {
-    "default_popup": "index.html",
     "default_icon": "icons/icon872.png",
     "default_title": "SoundNative"
   },

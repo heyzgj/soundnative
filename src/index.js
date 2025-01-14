@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-if (process.env.NODE_ENV === 'production') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-  gtag('config', 'G-FHS1NB2B9S');
-}
+// if (process.env.NODE_ENV === 'production') {
+//   window.dataLayer = window.dataLayer || [];
+//   function gtag() {
+//     window.dataLayer.push(arguments);
+//   }
+//   gtag('js', new Date());
+//   gtag('config', 'G-FHS1NB2B9S');
+// }
 
 const theme = createTheme();
 
