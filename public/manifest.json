@@ -10,7 +10,8 @@
   },
   "action": {
     "default_icon": "icons/icon872.png",
-    "default_title": "SoundNative"
+    "default_title": "SoundNative",
+    "default_popup": "index.html"
   },
   "permissions": [
     "storage"
