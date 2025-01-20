@@ -3,9 +3,6 @@ import axios from "axios";
 const apiKey = process.env.REACT_APP_DEEPSEEK_API_KEY;
 const baseURL = process.env.REACT_APP_DEEPSEEK_BASE_URL;
 
-console.log("API Key:", apiKey);
-console.log("Base URL:", baseURL);
-
 export const fetchChatCompletion = async (messages) => {
   try {
     const response = await axios.post(`${baseURL}/chat/completions`, {

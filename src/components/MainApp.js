@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { fetchChatCompletion } from '../api/deepseek';
 import Logout from './Logout';
 import {
   Container,
@@ -21,8 +20,6 @@ import {
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import './MainApp.css';
 
-
-
 const MainApp = ({ user }) => {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
@@ -37,31 +34,56 @@ const MainApp = ({ user }) => {
     }
   }, [user]);
 
+  async function callDeepseekAPI(messages) {
+    // 检查 offscreen 文档是否已存在
+    const hasOffscreenDocument = chrome.runtime.getContexts && (await chrome.runtime.getContexts({
+      contextTypes: ['OFFSCREEN_DOCUMENT'],
+      documentUrls: ['offscreen.html']
+    })).length > 0;
+  
+    // 如果 offscreen 文档不存在，则创建它
+    if (!hasOffscreenDocument) {
+      await chrome.offscreen.createDocument({
+        url: 'offscreen.html',
+        reasons: ['USER_MEDIA'],
+        justification: 'To call Deepseek API',
+      });
+    }
+  
+    // 向 offscreen 文档发送消息
+    return new Promise((resolve) => {
+      chrome.runtime.sendMessage({
+        action: "callDeepseekAPI",
+        messages: messages,
+        apiKey: YOUR_DEEPSEEK_API_KEY, // 将 YOUR_DEEPSEEK_API_KEY 替换为你的实际 API 密钥
+      }, (response) => {
+        if (response.error) {
+          console.error("Error calling Deepseek API:", response.error);
+          resolve(null);
+        } else {
+          resolve(response.result);
+        }
+      });
+    });
+  }
+
   const translateText = async () => {
     setLoading(true);
-    const systemPrompt = mode === 'chat'
-      // ? 'Your task is to rephrase the input text into fluent, natural, native English: Imagine you are texting casually with a friend. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. The causl level range value is from 1 up to 5, now your casual level is 3. Only output the rephrased English response. Now the input is:'
-      ? 'Your task is to rephrase the input text in [input][/input]in a very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. The casual level range value is from 1 up to 5, now your casual level is at 5. Only output the rephrased response.'
-      : 'Please help rephrase the following input text into fluent, natural, native English: Imagine you are emailing with a someone. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a email. Only output the rephrased email.';
-      // : mode === 'resume'
-      // ? 'You are creating a professional resume.'
-      // : 'You are a friendly assistant chatting casually.';
+    const systemPrompt =
+      mode === 'chat'
+        ? "Your task is to rephrase the input text in [input][/input]in a very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a casual texting conversation. The casual level range value is from 1 up to 5, now your casual level is at 5. Only output the rephrased response."
+        : "Please help rephrase the following input text into fluent, natural, native English: Imagine you are emailing with a someone. Rephrase the input text in a very very very very very natural, native English way while keeping the original meaning intact. Do not translate the text literally. Instead, focus on conveying the same ideas using common English phrases and grammar that a native speaker would use in a email. Only output the rephrased email.";
+    // : mode === 'resume'
+    // ? 'You are creating a professional resume.'
+    // : 'You are a friendly assistant chatting casually.';
 
     const messages = [
       { role: 'system', content: systemPrompt },
-      { role: 'user', content: '[input]' + inputText  + '[/input]'},
+      { role: 'user', content: '[input]' + inputText + '[input]' },
     ];
     try {
-      const response = await fetchChatCompletion(messages);
+      const response = await callDeepseekAPI(messages);
       setOutputText(response);
-
-      // if (window.gtag) {
-      //   window.gtag('event', 'translate', {
-      //     event_category: 'Text Translation',
-      //     event_label: mode,
-      //     value: inputText.length,
-      //   });
-      // }
     } catch (error) {
       console.error('Error:', error);
     } finally {
