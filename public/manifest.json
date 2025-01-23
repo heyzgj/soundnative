@@ -3,6 +3,7 @@
   "name": "SoundNative",
   "description": "Helps non-native speakers write like native English speakers.",
   "version": "1.0.3",
+  "privacy_policy_url": "https://github.com/heyzgj/soundnative-privacy-policy/blob/main/index.html",
   "icons": {  
     "48": "icons/icon48.png",
     "128": "icons/icon128.png",

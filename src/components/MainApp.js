@@ -55,7 +55,8 @@ const MainApp = ({ user }) => {
       chrome.runtime.sendMessage({
         action: "callDeepseekAPI",
         messages: messages,
-        apiKey: YOUR_DEEPSEEK_API_KEY, // 将 YOUR_DEEPSEEK_API_KEY 替换为你的实际 API 密钥
+        // apiKey: YOUR_DEEPSEEK_API_KEY, 
+        apiKey: "sk-7c273d09c0c5444caa0ee06b8595f526", // 将 YOUR_DEEPSEEK_API_KEY 替换为你的实际 API 密钥
       }, (response) => {
         if (response.error) {
           console.error("Error calling Deepseek API:", response.error);

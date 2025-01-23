@@ -153,7 +153,7 @@ const LoginPage = () => {
         )}
         {tab === 'register' && (
           <Typography variant="body2" sx={{ mt: 2 }}>
-            By continuing, you agree to our <Link href="#" sx={{ color: '#3a97ad', fontWeight: 'bold' }}>Terms of Service</Link> & <Link href="#" sx={{ color: '#3a97ad', fontWeight: 'bold' }}>Privacy Policy</Link>.
+            By continuing, you agree to our <Link href="https://github.com/heyzgj/soundnative-privacy-policy/blob/main/index.html" target="_blank" rel="noopener noreferrer" sx={{ color: '#3a97ad', fontWeight: 'bold' }}>Terms of Service</Link> & <Link href="https://github.com/heyzgj/soundnative-privacy-policy/blob/main/index.html" target="_blank" rel="noopener noreferrer" sx={{ color: '#3a97ad', fontWeight: 'bold' }}>Privacy Policy</Link>.
           </Typography>
         )}
         <Divider sx={{ my: 2 }}>or</Divider>
